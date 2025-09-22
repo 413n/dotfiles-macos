@@ -68,6 +68,16 @@ ZSH_THEME="robbyrussell"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Syntax highlighting
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Autosuggestions
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Completions
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -80,7 +90,8 @@ zsh-autosuggestions
 zsh-completions
 )
 
-autoload -U compinit && compinit
+autoload -Uz compinit
+compinit
 
 source $ZSH/oh-my-zsh.sh
 
