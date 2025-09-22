@@ -248,7 +248,7 @@ automatically-unhide-macos-hidden-apps = true
     4 = ['secondary', 'built-in']
     5 = ['secondary', 'built-in']
     6 = ['secondary', 'built-in']
-    7 = ['secondary', 'built-in']
+    7 = ['main', 'built-in']  
     8 = ['secondary', 'built-in']
     9 = ['secondary', 'built-in']
     10 = ['main', 'built-in']
@@ -270,6 +270,10 @@ run = 'move-node-to-workspace 1'
 # Vivaldi
 [[on-window-detected]]
 if.app-id = 'com.vivaldi.Vivaldi'
+run = 'move-node-to-workspace 1'
+# Helium
+[[on-window-detected]]
+if.app-id = 'net.imput.helium'
 run = 'move-node-to-workspace 1'
 
 
@@ -358,6 +362,16 @@ run = 'move-node-to-workspace 6'
 if.app-id = 'notion.id'
 run = 'move-node-to-workspace 6'
 
+
+# Workspace 7 - Entertainment
+# Riot
+[[on-window-detected]]
+if.app-id = 'imcom.riotgames.RiotGames.RiotClient'
+run = 'move-node-to-workspace 7'
+# League of Legends
+[[on-window-detected]]
+if.app-id = 'com.riotgames.LeagueofLegends.LeagueClientUx'
+run = 'move-node-to-workspace 7'
 
 
 # Workspace any - Floating windows
