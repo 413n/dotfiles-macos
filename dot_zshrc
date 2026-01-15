@@ -77,3 +77,5 @@ alias kp='kill-port'
 
 # Import general environment variables
 [ -f ~/.zsh_envs ] && source ~/.zsh_envs
+
+eval "$(mise activate zsh)"
