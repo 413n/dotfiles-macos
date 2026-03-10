@@ -8,8 +8,8 @@
 [include]
 	path = .gitconfig.private
 
-[includeIf "gitdir:~/Code/post-*/"]
-	path = .gitconfig.post
+[includeIf "gitdir:~/Code/dis-*/"]
+	path = .gitconfig.swisscom
 
 [pull]
 	rebase = true
@@ -108,6 +108,11 @@
 
 	# flush = !sh -c "git branch --merged | grep -v '*' | xargs -n 1 git branch -d"
 	flush = "!git branch | grep -v "master" | xargs git branch -D"
+
+	wta = "!f() { branch=\"$1\"; sanitized=$(echo \"$branch\" | sed 's/\\//-/g'); repodir=$(basename \"$(git rev-parse --show-toplevel)\"); git worktree add \"../$repodir-$sanitized\" \"$branch\"; }; f"
+	wtc = "!f() { branch=\"$1\"; sanitized=$(echo \"$branch\" | sed 's/\\//-/g'); repodir=$(basename \"$(git rev-parse --show-toplevel)\"); git worktree add -b \"$branch\" \"../$repodir-$sanitized\" main; }; f"
+	wtae = "!f() { branch=\"$1\"; sanitized=$(echo \"$branch\" | sed 's/\\//-/g'); repodir=$(basename \"$(git rev-parse --show-toplevel)\"); git worktree add \"../$repodir-$sanitized\" \"$branch\" && cd .. && { [ -f \"copy-env.sh\" ] && ./copy-env.sh \"$repodir-$sanitized\"; true; } && cd \"$repodir-$sanitized\"; }; f"
+	wtce = "!f() { branch=\"$1\"; sanitized=$(echo \"$branch\" | sed 's/\\//-/g'); repodir=$(basename \"$(git rev-parse --show-toplevel)\"); git worktree add -b \"$branch\" \"../$repodir-$sanitized\" main && cd .. && { [ -f \"copy-env.sh\" ] && ./copy-env.sh \"$repodir-$sanitized\"; true; } && cd \"$repodir-$sanitized\"; }; f"
 
 [init]
 	defaultBranch = main
