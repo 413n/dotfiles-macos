@@ -182,6 +182,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
     alt-0 = 'workspace 10'
+    alt-a = 'workspace 10'
+    
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -194,6 +196,7 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
     alt-shift-0 = 'move-node-to-workspace 10'
+    alt-shift-a = 'move-node-to-workspace 10'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -251,7 +254,7 @@ automatically-unhide-macos-hidden-apps = true
     7 = ['main', 'built-in']  
     8 = ['secondary', 'built-in']
     9 = ['secondary', 'built-in']
-    10 = ['main', 'built-in']
+    10 = ['U2422H', 'zowie', 'secondary', 'built-in']
 
 
 # Workspace 1 - Browsers
@@ -267,10 +270,6 @@ run = 'move-node-to-workspace 1'
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace 1'
-# Vivaldi
-[[on-window-detected]]
-if.app-id = 'com.vivaldi.Vivaldi'
-run = 'move-node-to-workspace 1'
 # Helium
 [[on-window-detected]]
 if.app-id = 'net.imput.helium'
@@ -281,6 +280,10 @@ run = 'move-node-to-workspace 1'
 # Cursor
 [[on-window-detected]]
 if.app-id = 'com.todesktop.230313mzl4w4u92'
+run = 'move-node-to-workspace 2'
+# Zed
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace 2'
 
 
@@ -302,9 +305,13 @@ run = 'move-node-to-workspace 3'
 if.app-id = 'com.apple.Terminal'
 run = 'move-node-to-workspace 3'
 # Ghostty 
-# [[on-window-detected]]
-# if.app-id = 'com.mitchellh.ghostty'
-# run = 'move-node-to-workspace 3'
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace 3'
+# cmux
+[[on-window-detected]]
+if.app-id = 'com.cmuxterm.app'
+run = 'move-node-to-workspace 3'
 
 
 # Workspace 4 - Messengers work
@@ -316,14 +323,23 @@ run = 'move-node-to-workspace 4'
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace 4'
-# Outlook
-[[on-window-detected]]
-if.app-id = 'com.microsoft.Outlook'
-run = 'move-node-to-workspace 4'
+# Outlook Reminders (must come BEFORE the generic Outlook rule:
+# callbacks stop at the first match unless check-further-callbacks = true)
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
 if.window-title-regex-substring = 'Reminders'
-run = ['layout floating']
+run = ['layout floating', 'move-node-to-workspace 4']
+# Outlook
+[[on-window-detected]]
+if.app-id = 'com.microsoft.Outlook'
+run = ['layout tiling', 'move-node-to-workspace 4']
+# Abacus
+[[on-window-detected]]
+if.app-id = 'ch.abacus.abaclient'
+run = 'move-node-to-workspace 4'
+[[on-window-detected]]
+if.app-id = 'ch.abacus.abaclientmanager'
+run = 'move-node-to-workspace 4'
 
 
 # Workspace 5 - Personal/Messengers
@@ -336,9 +352,12 @@ run = 'move-node-to-workspace 5'
 if.app-id = 'net.whatsapp.WhatsApp'
 run = 'move-node-to-workspace 5'
 # Spotify
+# 'layout tiling' is required: AeroSpace's dialog heuristic auto-floats this
+# window, and move-node-to-workspace alone does not override that decision.
+# move-node-to-workspace must stay LAST in the run list.
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
-run = 'move-node-to-workspace 5'
+run = ['layout tiling', 'move-node-to-workspace 5']
 
 # Workspace 6 - Office and Agile
 # Word
@@ -363,15 +382,19 @@ if.app-id = 'notion.id'
 run = 'move-node-to-workspace 6'
 
 
-# Workspace 7 - Entertainment
-# Riot
+# Workspace 10 - AI
+# Codex
 [[on-window-detected]]
-if.app-id = 'imcom.riotgames.RiotGames.RiotClient'
-run = 'move-node-to-workspace 7'
-# League of Legends
+if.app-id = 'com.openai.codex'
+run = 'move-node-to-workspace 10'
+# Claude
 [[on-window-detected]]
-if.app-id = 'com.riotgames.LeagueofLegends.LeagueClientUx'
-run = 'move-node-to-workspace 7'
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace 10'
+# T3 Code
+[[on-window-detected]]
+if.app-id = 'com.t3tools.t3code'
+run = 'move-node-to-workspace 10'
 
 
 # Workspace any - Floating windows
