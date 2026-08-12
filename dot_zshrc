@@ -78,4 +78,25 @@ alias kp='kill-port'
 # Import general environment variables
 [ -f ~/.zsh_envs ] && source ~/.zsh_envs
 
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
+export PATH="$HOME/.local/bin:$PATH"
+
+# Lid-Sleep control (battery power)
+lid-sleep-off() {
+    # Deactivate Lid-Sleep: keep system awake when lid is closed
+    sudo pmset -b sleep 0
+    sudo pmset -b disablesleep 1
+    echo "Lid-Sleep deactivated: system will stay awake."
+}
+lid-sleep-on() {
+    # Activate Lid-Sleep: let system sleep again, like normal
+    sudo pmset -b sleep 60
+    sudo pmset -b disablesleep 0
+    echo "Lid-Sleep activated: system will sleep normally."
+}
+
+# Keep last: mise shims must win over the PATH edits above
 eval "$(mise activate zsh)"
